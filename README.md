@@ -21,7 +21,7 @@ These capabilities make the scheduler useful for daily planning, workload tracki
 
 🛠️ Tech Stack
 
-Programming Language: Python
+Programming Language: Java
 
 Interface: Command-Line Interface (CLI)
 
