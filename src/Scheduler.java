@@ -2,46 +2,94 @@ import java.util.*;
 
 public class Scheduler {
 
-    static final int MAX_DAYS = 5;
+    // Deadline ≤ 4 → This week
+    // Deadline > 4 → Next week
 
-    public static void generateSchedule(List<Project> projects) {
-
-        // Sort by revenue descending
-        projects.sort((a, b) -> b.revenue - a.revenue);
-
-        Project[] schedule = new Project[MAX_DAYS];
-        boolean[] occupied = new boolean[MAX_DAYS];
-
-        int totalRevenue = 0;
-
-        for (Project project : projects) {
-
-            // Try assigning to latest available slot before deadline
-            for (int day = Math.min(MAX_DAYS, project.deadline) - 1; day >= 0; day--) {
-
-                if (!occupied[day]) {
-                    schedule[day] = project;
-                    occupied[day] = true;
-                    totalRevenue += project.revenue;
-                    break;
-                }
+    public List<Project> getThisWeekProjects(List<Project> projects) {
+        List<Project> list = new ArrayList<>();
+        for (Project p : projects) {
+            if (p.getDeadline() <= 4) {
+                list.add(p);
             }
         }
+        return list;
+    }
 
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    public List<Project> getNextWeekProjects(List<Project> projects) {
+        List<Project> list = new ArrayList<>();
+        for (Project p : projects) {
+            if (p.getDeadline() > 4) {
+                list.add(p);
+            }
+        }
+        return list;
+    }
 
-        System.out.println("\n📅 Weekly Schedule:");
+    // Backtracking optimal schedule (NOT greedy)
+    public List<Project> generateOptimalSchedule(List<Project> projects) {
 
-        for (int i = 0; i < MAX_DAYS; i++) {
-            if (schedule[i] != null) {
-                System.out.println(days[i] + " → " +
-                        schedule[i].title +
-                        " (Revenue: " + schedule[i].revenue + ")");
+        List<Project> best = new ArrayList<>();
+        double[] maxRevenue = {0};
+
+        backtrack(projects, 0, new ArrayList<>(), best, maxRevenue);
+        return best;
+    }
+
+    private void backtrack(List<Project> projects, int index,
+                           List<Project> current,
+                           List<Project> best,
+                           double[] maxRevenue) {
+
+        if (current.size() > 5) return;
+        if (!isValidSchedule(current)) return;
+
+        double revenue = current.stream()
+                .mapToDouble(Project::getRevenue)
+                .sum();
+
+        if (revenue > maxRevenue[0]) {
+            maxRevenue[0] = revenue;
+            best.clear();
+            best.addAll(new ArrayList<>(current));
+        }
+
+        for (int i = index; i < projects.size(); i++) {
+            current.add(projects.get(i));
+            backtrack(projects, i + 1, current, best, maxRevenue);
+            current.remove(current.size() - 1);
+        }
+    }
+
+    private boolean isValidSchedule(List<Project> schedule) {
+
+        schedule.sort(Comparator.comparingInt(Project::getDeadline));
+
+        for (int i = 0; i < schedule.size(); i++) {
+            if (i + 1 > schedule.get(i).getDeadline()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public double totalRevenue(List<Project> list) {
+        return list.stream().mapToDouble(Project::getRevenue).sum();
+    }
+
+    public void printWeekSchedule(String title, List<Project> schedule) {
+
+        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"};
+
+        System.out.println("\n📅 " + title);
+
+        for (int i = 0; i < days.length; i++) {
+            if (i < schedule.size()) {
+                System.out.println(days[i] + " → " + schedule.get(i));
             } else {
                 System.out.println(days[i] + " → No Project");
             }
         }
 
-        System.out.println("\n💰 Total Revenue: " + totalRevenue);
+        System.out.println("💰 Total Revenue: ₹" + totalRevenue(schedule));
     }
 }

@@ -4,19 +4,11 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    public static void main(String[] args) {
+    private static final String URL = "jdbc:postgresql://localhost:5432/promanage";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "Madhubani@16";
 
-        String url = "jdbc:postgresql://localhost:5432/promange_db";
-        String user = "postgres";
-        String password = "Madhubani@16";  // put your actual password
-
-        try {
-            Connection conn = DriverManager.getConnection(url, user, password);
-            System.out.println("✅ Connected to PostgreSQL Successfully!");
-            conn.close();
-        } catch (SQLException e) {
-            System.out.println("❌ Connection Failed!");
-            e.printStackTrace();
-        }
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
