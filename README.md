@@ -1,23 +1,23 @@
 📅 Task Scheduling System
 
-A Task Scheduling System designed to manage, organize, and visualize scheduled tasks efficiently.
-The project provides a daily-oriented overview of tasks, helping users quickly identify what needs immediate attention and what is upcoming in the next business days.
+A Java-based Task Scheduling System designed to efficiently manage, organize, and visualize scheduled tasks.
+The application provides a day-focused overview, enabling users to quickly identify urgent tasks and monitor upcoming work across business days.
 
-🚀 Features
+This lightweight scheduler is ideal for daily planning, productivity tracking, and client-based task management without relying on heavy project-management tools.
 
-📌 Manage and track scheduled tasks for multiple clients or categories
+🚀 Key Features
 
-📅 View tasks due today and in the upcoming business days
+📌 Manage and track tasks across multiple clients or categories
 
-🗂️ Hierarchical task display with priority, duration, and description
+📅 Instantly view tasks due today and in upcoming business days
 
-⚡ Simple execution through a command-line interface
+🗂️ Hierarchical task structure including priority, duration, and description
 
-🧾 Configuration-based task storage for easy updates and persistence
+⚡ Lightweight command-line execution for fast interaction
 
-🔍 Clear visualization of pending and upcoming work
+🧾 Configuration-driven storage for easy updates and persistence
 
-These capabilities make the scheduler useful for daily planning, workload tracking, and productivity management.
+🔍 Clear visibility of pending and upcoming workloads
 
 🛠️ Tech Stack
 
@@ -25,30 +25,27 @@ Programming Language: Java
 
 Interface: Command-Line Interface (CLI)
 
-Configuration: INI-based task storage
+Configuration Storage: INI-based task configuration
 
 📂 Project Structure
 Task-Scheduling-System/
-
-
-│──Scheduler.java   # Main scheduler script
-│──Main.java
-│──Project.java
-│── ProjectDAO.java    # Task configuration file   
-│── DBConnection.java            
-│── README.md          # Project documentation
-│── .gitignore
+│
+├── Scheduler.java        # Core scheduling logic
+├── Main.java             # Application entry point
+├── Project.java          # Task/Project model
+├── ProjectDAO.java       # Data handling & persistence
+├── DBConnection.java     # Database connection setup
+├── README.md             # Documentation
+└── .gitignore
 
 ▶️ Getting Started
-
-
-1️⃣ Clone the repository
+1️⃣ Clone the Repository
 git clone https://github.com/himanshujha262/Task-Scheduling-System.git
 cd Task-Scheduling-System
 
-2️⃣ Configure tasks
+2️⃣ Configure Tasks
 
-Edit the tasks.ini file and add task details such as:
+Edit the tasks.ini file and define:
 
 schedule
 
@@ -58,11 +55,11 @@ estimated duration
 
 description
 
-3️⃣ Run the scheduler
+3️⃣ Run the Scheduler
 java task_scheduler.java
 
 
-The program will read configured tasks and display those due today and within the next few business days.
+The system will read configured tasks and display those due today and within the next business days.
 
 📊 Example Output
 📅 Tasks
@@ -74,17 +71,17 @@ The program will read configured tasks and display those due today and within th
     │   └── description: Example task
 
 
-This hierarchical structure helps users quickly understand priorities and timelines.
+This hierarchical visualization makes it easy to understand priorities, timelines, and workload distribution at a glance.
 
 🎯 Use Cases
 
-Personal task planning
+Personal daily task planning
 
 Client-based work tracking
 
-Daily productivity monitoring
+Productivity and workload monitoring
 
-Lightweight scheduling without heavy project-management tools
+Lightweight scheduling without complex PM tools
 
 🤝 Contributing
 
@@ -92,17 +89,13 @@ Contributions are welcome!
 
 Fork the repository
 
-Create a new branch
+Create a new feature branch
 
 Commit your changes
 
 Submit a pull request
 
-📜 License
-
-This project is open-source and available under the MIT License (or update with your preferred license).
-
 👤 Author
 
 Himanshu Jha
-GitHub: https://github.com/himanshujha262
+GitHub → https://github.com/himanshujha262
